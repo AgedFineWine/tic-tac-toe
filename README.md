@@ -4,4 +4,4 @@ A simple Tic Tac Toe game to practice DOM manipulation via JavaScript. This proj
 
 ## Features
 - Light/dark mode toggle
-- Live previews
+- <a href="https://agedfinewine.github.io/tic-tac-toe/">Live previews</a>
