@@ -94,6 +94,13 @@ class Game {
         }
     }
 
+    toggleOnOffBtn() {
+        const cells = document.querySelectorAll('.cell');
+        cells.forEach(btn => {
+            btn.disabled = !btn.disabled;
+        });
+    }
+
     handleBtnClick(id, btn) {
         // if the text is empty it is truthy
         if (!btn.textContent) {
@@ -110,11 +117,14 @@ class Game {
             if (this.gameboard.checkWin(this.currentPlayer)) {
                 alert(`${this.currentPlayer.name} has won the game!`);
                 msg.textContent = `has won the game!`;
+                this.toggleOnOffBtn();
 
             } else if (this.gameboard.checkDraw(this.currentPlayer)) {
                 alert("It's a tie!");
                 player.textContent = '';
                 msg.textContent = "It's a tie!";
+                this.toggleOnOffBtn();
+
             } else {
                 // if the current player name is X, swaps to playerO if not it goes to playerX
                 this.currentPlayer = this.currentPlayer.name === this.playerX.name ? this.playerO : this.playerX;
@@ -135,6 +145,7 @@ class Game {
     resetGame() {
         // make new buttons to replace the old ones
         document.querySelectorAll('.cell').forEach(btn => {
+            this.toggleOnOffBtn();
             btn.textContent = '';
             btn.style.backgroundColor = '#f0f0f0';
             // Remove existing event listeners
