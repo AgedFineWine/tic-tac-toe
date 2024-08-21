@@ -49,6 +49,7 @@ main {
     color: white;
     font-size: 14pt;
     border-radius: .7rem;
+    border-style: none;
 }
 
 #reset:hover {
