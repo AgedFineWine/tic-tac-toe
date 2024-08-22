@@ -13,8 +13,8 @@ class Game {
 
     buttonSetUp() {
         for (let id = 1; id <= 9; id++) {
-            const btn = document.getElementById(`${id}`);
-            btn.addEventListener('click', event => this.handleBtnClick(id, btn));
+            const btn = document.getElementById(`cell-${id}`);
+            btn.addEventListener('click', event => this.handleBtnClick(`cell-${id}`, btn));
         }
     }
 
@@ -56,7 +56,7 @@ class Game {
             const jsConfetti = new JSConfetti();
             jsConfetti.addConfetti();
             
-        } else if (this.gameboard.checkDraw(this.currentPlayer)) {
+        } else if (this.gameboard.checkDraw()) {
             // alert("It's a tie!");
             player.textContent = '';
             msg.textContent = "It's a tie!";
