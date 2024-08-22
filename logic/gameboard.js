@@ -40,13 +40,22 @@ class Gameboard {
         }
     }
 
+    findWinSet(playerObj) {
+        if (!playerObj || !playerObj.idSet || !this.win) throw new Error('Invalid input, Gameboard.findWin()');
+        for (const winSet of this.win) {
+            if ([...winSet].every(cellId => playerObj.idSet.has(cellId))) {
+                return winSet;
+            }
+        }
+    }
+
     // iterate through all possible win possibilties
     checkWin(playerObj) {
         // need at least one case is true hence we use the .some() method
         return this.win.some(winSet => {
             // player must occupy all of the cells per win possibility
-            return [...winSet].every(id => {
-                return playerObj.idSet.has(id)
+            return [...winSet].every(cellId => {
+                return playerObj.idSet.has(cellId)
             });
         });
     }

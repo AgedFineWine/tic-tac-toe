@@ -35,6 +35,20 @@ class Game {
         });
     }
 
+    showWinner(winSet) {
+        const ids = [ 'cell-1', 'cell-2', 'cell-3', 'cell-4', 'cell-5', 'cell-6', 'cell-7', 'cell-8', 'cell-9' ]
+        for (const cellId of ids) {
+            const btn = document.querySelector(`#${cellId}`);
+            if (winSet.has(cellId)) {
+                btn.style.boxShadow = '0 0 3px 3px gold';
+            } else {
+                btn.style.transform = 'scale(.7)';
+                btn.style.filter = 'blur(4px)';
+            }
+        }
+    }
+
+    /* tells the program what to do if a cell button is clicked */
     handleBtnClick(id, btn) {
         // if the text is empty it is truthy
         if (!btn.textContent) {
@@ -43,7 +57,7 @@ class Game {
             this.gameboard.changeCell(this.currentPlayer, id);
             this.currentPlayer.addId(id);
 
-            btn.style.backgroundColor = this.currentPlayer.name === 'X' ? 'red' : 'blue';
+            btn.style.backgroundColor = this.currentPlayer.name === 'X' ? '#04d9ff' : '#ff6700';
             btn.style.color = 'white';
 
             this.checkGameStatus();
@@ -63,6 +77,11 @@ class Game {
             const jsConfetti = new JSConfetti();
             jsConfetti.addConfetti();
 
+            /* winSet is the set of cell IDs that is connected 3 in a row */
+            const winSet = this.gameboard.findWinSet(this.currentPlayer);
+            this.showWinner(winSet);
+
+
         } else if (this.gameboard.checkDraw()) {
             player.textContent = '';
             msg.textContent = "It's a tie!";
@@ -74,7 +93,7 @@ class Game {
             const playerSpan = document.querySelector('#player');
             // change the span content
             playerSpan.textContent = this.currentPlayer.name === 'X' ? "Player X's" : "Player O's";
-            playerSpan.style.color = this.currentPlayer.name === 'X' ? 'red' : 'blue';
+            playerSpan.style.color = this.currentPlayer.name === 'X' ? '#04d9ff' : '#ff6700';
             // change the color of the span
         }
     }
@@ -89,7 +108,10 @@ class Game {
         document.querySelectorAll('.cell').forEach(btn => {
             this.enableBtn();
             btn.textContent = '';
+            btn.style.boxShadow = 'none';
             btn.style.backgroundColor = '#d6d6d6';
+            btn.style.filter = 'none';
+            btn.style.transform = 'none';
             // Remove existing event listeners
             const newBtn = btn.cloneNode(false);
             btn.replaceWith(newBtn);
