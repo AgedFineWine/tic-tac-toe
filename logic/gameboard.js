@@ -8,22 +8,22 @@ class Gameboard {
         ];
         // all possible cell combinations a player must occupy before winning
         this.win = [
-            new Set([1, 2, 3]), new Set([4, 5, 6]), new Set([7, 8, 9]),
-            new Set([1, 4, 7]), new Set([2, 5, 8]), new Set([3, 6, 9]),
-            new Set([1, 5, 9]), new Set([3, 5, 7])
+            new Set(['cell-1', 'cell-2', 'cell-3']), new Set(['cell-4', 'cell-5', 'cell-6']), new Set(['cell-7', 'cell-8', 'cell-9']),
+            new Set(['cell-1', 'cell-4', 'cell-7']), new Set(['cell-2', 'cell-5','cell-8']), new Set(['cell-3', 'cell-6', 'cell-9']),
+            new Set(['cell-1', 'cell-5', 'cell-9']), new Set(['cell-3', 'cell-5', 'cell-7'])
         ];
 
         // used to change the this.gameboard in the changeCell() method
         this.idMap = new Map([
-            [1, { row: 0, col: 0 }],
-            [2, { row: 0, col: 1 }],
-            [3, { row: 0, col: 2 }],
-            [4, { row: 1, col: 0 }],
-            [5, { row: 1, col: 1 }],
-            [6, { row: 1, col: 2 }],
-            [7, { row: 2, col: 0 }],
-            [8, { row: 2, col: 1 }],
-            [9, { row: 2, col: 2 }],
+            ['cell-1', { row: 0, col: 0 }],
+            ['cell-2', { row: 0, col: 1 }],
+            ['cell-3', { row: 0, col: 2 }],
+            ['cell-4', { row: 1, col: 0 }],
+            ['cell-5', { row: 1, col: 1 }],
+            ['cell-6', { row: 1, col: 2 }],
+            ['cell-7', { row: 2, col: 0 }],
+            ['cell-8', { row: 2, col: 1 }],
+            ['cell-9', { row: 2, col: 2 }],
         ]);
 
     }
@@ -51,12 +51,13 @@ class Gameboard {
         });
     }
 
-    checkDraw(playerObj) {
+    checkDraw() {
         const board = this.getBoard();
-        // the first condition isn't really necessary because of how
-        // implemented the code body in addEventListener
-        return !this.checkWin(playerObj) && board.every(nestedArray => {
-            nestedArray.every(element => element !== null);
+
+        return board.every(nestedArray => {
+            return nestedArray.every(element => {
+                return element !== null;
+            });
         });
     }
 }
