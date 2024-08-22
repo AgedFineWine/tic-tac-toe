@@ -20,12 +20,19 @@ class Game {
 
     disableBtn() {
         const cells = document.querySelectorAll('.cell');
-        cells.forEach(btn => btn.disabled = true);
+        cells.forEach(btn => {
+            btn.disabled = true;
+            // change background color for cells that are not occupied
+            if (btn.textContent === '') btn.style.backgroundColor = '#f0f0f0';
+        });
     }
 
     enableBtn() {
         const cells = document.querySelectorAll('.cell');
-        cells.forEach(btn => btn.disabled = false);
+        cells.forEach(btn => {
+            btn.disabled = false;
+            btn.style.backgroundColor = '#d6d6d6';
+        });
     }
 
     handleBtnClick(id, btn) {
@@ -48,16 +55,15 @@ class Game {
         const player = document.querySelector('#player');
 
         if (this.gameboard.checkWin(this.currentPlayer)) {
-            // alert(`${this.currentPlayer.name} has won the game!`);
+            player.textContent = `Player ${this.currentPlayer.name}`;
             msg.textContent = `has won the game!`;
 
             this.disableBtn();
 
             const jsConfetti = new JSConfetti();
             jsConfetti.addConfetti();
-            
+
         } else if (this.gameboard.checkDraw()) {
-            // alert("It's a tie!");
             player.textContent = '';
             msg.textContent = "It's a tie!";
             this.disableBtn();
@@ -83,7 +89,7 @@ class Game {
         document.querySelectorAll('.cell').forEach(btn => {
             this.enableBtn();
             btn.textContent = '';
-            btn.style.backgroundColor = '#f0f0f0';
+            btn.style.backgroundColor = '#d6d6d6';
             // Remove existing event listeners
             const newBtn = btn.cloneNode(false);
             btn.replaceWith(newBtn);
