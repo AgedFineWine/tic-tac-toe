@@ -48,12 +48,16 @@ class Game {
         const player = document.querySelector('#player');
 
         if (this.gameboard.checkWin(this.currentPlayer)) {
-            alert(`${this.currentPlayer.name} has won the game!`);
+            // alert(`${this.currentPlayer.name} has won the game!`);
             msg.textContent = `has won the game!`;
+
             this.disableBtn();
 
+            const jsConfetti = new JSConfetti();
+            jsConfetti.addConfetti();
+            
         } else if (this.gameboard.checkDraw(this.currentPlayer)) {
-            alert("It's a tie!");
+            // alert("It's a tie!");
             player.textContent = '';
             msg.textContent = "It's a tie!";
             this.disableBtn();

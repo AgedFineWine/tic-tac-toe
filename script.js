@@ -1,4 +1,4 @@
-import Game from "./js/game.js";
+import Game from "./logic/game.js";
 
 (() => {
     const newGame = new Game();
