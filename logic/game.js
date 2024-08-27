@@ -121,7 +121,7 @@ class Game {
         const player = document.querySelector('#player');
         const msg = document.querySelector('#msg');
         player.textContent = "Player X's";
-        player.style.color = 'red';
+        player.style.color = '#04d9ff';
         msg.textContent = 'Move';
     }
 }
